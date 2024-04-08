@@ -2,14 +2,14 @@ const { Consumer } = require("sqs-consumer");
 const { SQSClient } = require("@aws-sdk/client-sqs");
 
 const app = Consumer.create({
-  queueUrl: "https://sqs.AWS-REGION.amazonaws.com/ACCOUNT-NUMBER/SQS-NAME",
+  queueUrl: process.env.SQS_QUEUE_URL,
   handleMessage: async (message) => {
     console.log("Receiving Message")
     console.log(message)
     console.log("Message Received")
   },
   sqs: new SQSClient({
-    region: "us-east-1"
+    region: process.env.AWS_REGION,
   }),
 });
 
